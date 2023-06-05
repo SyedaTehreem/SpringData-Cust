@@ -19,7 +19,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public CustomerRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    public List<CustomerInfo> getAllCustomers() {
+   /* public List<CustomerInfo> findAll() {
         String sql = "SELECT * FROM customer_info";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             CustomerInfo customer = new CustomerInfo();
@@ -32,7 +32,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             return customer;
         });
-    }
+    }*/
 ///// Insert method
     public <S extends CustomerInfo> S save(S customer) {
         // Implement save logic here
@@ -82,7 +82,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return count > 0;
     }
     ///Find all method
-    public Iterable<CustomerInfo> findAll() {
+    public List<CustomerInfo> findAll() {
         // Implement find all logic here
         String sql = "SELECT * FROM customer_info";
         return jdbcTemplate.query(sql, (rs, rowNum) -> {

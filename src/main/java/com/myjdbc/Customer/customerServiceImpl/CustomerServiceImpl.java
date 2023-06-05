@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public List<CustomerInfo> getAllCustomers() {
-        Iterable<CustomerInfo> customersIterable = customerRepository.getAllCustomers();
+        Iterable<CustomerInfo> customersIterable = customerRepository.findAll();
         List<CustomerInfo> customersList = StreamSupport.stream(customersIterable.spliterator(), false)
                 .collect(Collectors.toList());
         return customersList;
