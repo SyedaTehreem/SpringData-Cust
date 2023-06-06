@@ -10,7 +10,7 @@ import com.myjdbc.Customer.service.CustomerService;
 
 import java.util.List;
 @RestController
-@RequestMapping("api/customers")
+@RequestMapping("/api/customers")
 public class CustomerController {
     @Autowired
 

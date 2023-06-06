@@ -41,7 +41,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customer;
     }
 
-    //// Save All Insert method
+    //// Save All Logic -----Insert method
     public <S extends CustomerInfo> Iterable<S> saveAll(Iterable<S> customers) {
 
         List<S> savedCustomers = new ArrayList<>();
@@ -75,6 +75,8 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             return Optional.of(customer);
         });
     }
+
+    ///Exist by id
     public boolean existsById(Integer id) {
         // Implement exists by ID logic here
         String sql = "SELECT COUNT(*) FROM customer_info WHERE id = ?";
@@ -165,7 +167,7 @@ public long count() {
         parameters.addValue("ids", ids);
         jdbcTemplate.update(sql, parameters);
     }
-    //
+
 
 
 
