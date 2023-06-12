@@ -58,13 +58,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             savedCustomers.add(customer);
         }
         return savedCustomers;
-
     }
     /// Id
     public Optional<CustomerInfo> findById(Integer id) {
-        // Implement find by ID logic here
         String sql = "SELECT * FROM customer_info WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
+        List<CustomerInfo> customers = jdbcTemplate.query(sql, new Object[]{id}, (rs, rowNum) -> {
             CustomerInfo customer = new CustomerInfo();
             customer.setId(rs.getInt("id"));
             customer.setName(rs.getString("name"));
@@ -72,9 +70,13 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             customer.setCity(rs.getString("city"));
             customer.setCountry(rs.getString("country"));
             customer.setAddress(rs.getString("address"));
-            return Optional.of(customer);
+            return customer;
         });
+
+        return customers.stream().findFirst();
     }
+
+
 
     ///Exist by id
     public boolean existsById(Integer id) {
@@ -87,6 +89,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public List<CustomerInfo> findAll() {
         // Implement find all logic here
         String sql = "SELECT * FROM customer_info";
+
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             CustomerInfo customer = new CustomerInfo();
             customer.setId(rs.getInt("id"));
